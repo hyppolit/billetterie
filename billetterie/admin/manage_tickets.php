@@ -2,13 +2,13 @@
 session_start();
 include '../config.php';
 
-// Vérifier que l'utilisateur est admin
+
 if(!isset($_SESSION['user']) || $_SESSION['role'] != 'admin'){
     header('Location: ../login.php');
     exit;
 }
 
-// Ajouter un billet
+
 if(isset($_POST['add_ticket'])){
     $event_name = $_POST['event_name'];
     $event_date = $_POST['event_date'];
@@ -21,7 +21,7 @@ if(isset($_POST['add_ticket'])){
     $message = "Billet ajouté avec succès !";
 }
 
-// Modifier un billet
+
 if(isset($_POST['edit_ticket'])){
     $id = $_POST['id'];
     $event_name = $_POST['event_name'];
@@ -35,7 +35,7 @@ if(isset($_POST['edit_ticket'])){
     $message = "Billet modifié avec succès !";
 }
 
-// Supprimer un billet
+
 if(isset($_POST['delete_ticket'])){
     $delete_id = $_POST['delete_id'];
     $stmt = $conn->prepare("DELETE FROM tickets WHERE id=?");
@@ -44,7 +44,7 @@ if(isset($_POST['delete_ticket'])){
     $message = "Billet supprimé avec succès !";
 }
 
-// Récupérer tous les billets
+
 $tickets = $conn->query("SELECT * FROM tickets");
 ?>
 
@@ -90,7 +90,7 @@ $tickets = $conn->query("SELECT * FROM tickets");
     <td><?= $row['price'] ?> €</td>
     <td><?= $row['stock'] ?></td>
     <td>
-        <!-- Formulaire pour modifier -->
+        
         <form method="post" style="display:inline-block;">
             <input type="hidden" name="id" value="<?= $row['id'] ?>">
             <input type="text" name="event_name" value="<?= htmlspecialchars($row['event_name']) ?>" required>
@@ -99,7 +99,7 @@ $tickets = $conn->query("SELECT * FROM tickets");
             <input type="number" name="stock" value="<?= $row['stock'] ?>" required>
             <input type="submit" name="edit_ticket" value="Modifier" style="background:#4e54c8;color:white;border:none;padding:5px 10px;border-radius:3px;cursor:pointer;">
         </form>
-        <!-- Formulaire pour supprimer -->
+      
         <form method="post" style="display:inline-block;">
             <input type="hidden" name="delete_id" value="<?= $row['id'] ?>">
             <input type="submit" name="delete_ticket" value="Supprimer" style="background:#ff6b6b;color:white;border:none;padding:5px 10px;border-radius:3px;cursor:pointer;">
@@ -110,3 +110,4 @@ $tickets = $conn->query("SELECT * FROM tickets");
 </table>
 </body>
 </html>
+
