@@ -7,7 +7,7 @@ $cart = $_SESSION['cart'] ?? [];
 if(empty($cart)){ header('Location: cart_public.php'); exit; }
 
 
-// Vérifier connexion
+
 if(!isset($_SESSION['user'])){
 header('Location: ../login.php'); exit;
 }
@@ -18,7 +18,7 @@ $stmt->execute();
 $user_id = $stmt->get_result()->fetch_assoc()['id'];
 
 
-// Créer commandes et marquer sièges comme vendus
+
 foreach($cart as $event_id=>$seats){
 $event = $conn->query("SELECT price FROM events WHERE id=$event_id")->fetch_assoc();
 $total = $event['price']*count($seats);
@@ -38,4 +38,5 @@ $conn->query("UPDATE seats SET status='sold' WHERE event_id=$event_id AND row_nu
 unset($_SESSION['cart']);
 header('Location: ticket_pdf.php');
 exit;
+
 ?>
