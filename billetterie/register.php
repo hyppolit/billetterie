@@ -12,7 +12,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     if($username == "" || $password == ""){
         $error = "Veuillez remplir tous les champs.";
     } else {
-        // Vérifie si l'utilisateur existe déjà
+       
         $stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
         $stmt->bind_param("s",$username);
         $stmt->execute();
@@ -21,7 +21,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         if($stmt->num_rows > 0){
             $error = "Cet utilisateur existe déjà.";
         } else {
-            // Hash du mot de passe
+          
             $hashed = password_hash($password, PASSWORD_DEFAULT);
 
             $insert = $conn->prepare("INSERT INTO users (username, password, role) VALUES (?, ?, 'user')");
@@ -70,5 +70,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     </div>
 </body>
 </html>
+
 
 
