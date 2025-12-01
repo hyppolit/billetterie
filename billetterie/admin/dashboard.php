@@ -2,13 +2,13 @@
 session_start();
 include '../config.php';
 
-// Vérifier que c'est bien un admin connecté
+
 if(!isset($_SESSION['user']) || $_SESSION['role']!='admin'){
     header('Location: ../login.php');
     exit;
 }
 
-// Récupérer tous les billets
+
 $tickets = $conn->query("SELECT * FROM tickets");
 ?>
 
@@ -51,4 +51,5 @@ $tickets = $conn->query("SELECT * FROM tickets");
        Gérer les billets
     </a>
 </p>
+
 
