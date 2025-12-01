@@ -7,14 +7,14 @@ if(!isset($_SESSION['user']) || $_SESSION['role']!='admin'){
     exit;
 }
 
-// Bouton switch vers utilisateur
+
 if(isset($_GET['switch_user'])){
     $_SESSION['role']='user';
     header('Location: ../user/home.php');
     exit;
 }
 
-// Récupérer les billets pour l’admin
+
 $tickets = $conn->query("SELECT * FROM tickets");
 ?>
 
@@ -49,3 +49,4 @@ $tickets = $conn->query("SELECT * FROM tickets");
 </table>
 </body>
 </html>
+
